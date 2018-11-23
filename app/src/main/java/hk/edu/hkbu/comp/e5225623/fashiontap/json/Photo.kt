@@ -13,7 +13,6 @@ data class Photo(
     val description: String,
     val id: Int,
     val like_counter: Int,
-    var tags: Tag?,
     val timestamp: Timestamp,
     val upload: String,
     val upload_h: Int,
@@ -25,4 +24,4 @@ data class Photo(
     val viewer_favorited: Boolean,
     val viewer_liked: Boolean,
     val viewer_owner: Boolean
-) : Parcelable
+): Parcelable

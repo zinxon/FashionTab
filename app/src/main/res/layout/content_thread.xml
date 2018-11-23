@@ -1,13 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout  xmlns:android="http://schemas.android.com/apk/res/android"
-         xmlns:tools="http://schemas.android.com/tools"
-         xmlns:app="http://schemas.android.com/apk/res-auto">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <import type="android.databinding.ObservableArrayList" />
+        <variable name="itemBinding"
+                  type="me.tatarka.bindingcollectionadapter2.ItemBinding&lt;hk.edu.hkbu.comp.e5225623.fashiontap.json.Photo>" />
+        <variable name="photo"
+                  type="ObservableArrayList&lt;hk.edu.hkbu.comp.e5225623.fashiontap.json.Photo>"/>
+    </data>
+    <android.support.constraint.ConstraintLayout  android:layout_width="match_parent"
+                                                  android:layout_height="match_parent"
+                                                  app:layout_behavior="@string/appbar_scrolling_view_behavior"
+                                                  tools:context=".ThreadActivity"
+                                                  tools:showIn="@layout/activity_thread">
 
-<android.support.constraint.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        tools:showIn="@layout/activity_thread"
-        tools:context=".ThreadActivity">
 
-</android.support.constraint.ConstraintLayout></layout>
+    </android.support.constraint.ConstraintLayout>
+</layout>

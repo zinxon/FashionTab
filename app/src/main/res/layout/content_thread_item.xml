@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto">
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools">
     <data>
         <import type="java.time.Instant" />
         <import type="java.time.ZoneId" />
@@ -17,17 +18,21 @@
                 android:layout_height="match_parent"
                 android:background="@color/colorPrimaryDark">
 
-            <TextView  android:layout_width="wrap_content"
-                       android:layout_height="wrap_content"
-                       app:layout_constraintStart_toStartOf="parent"
-                       android:textColor="@android:color/primary_text_dark"
-                       android:text='@{photo.user.username}'/>
 
-            <TextView  android:layout_width="wrap_content"
-                       android:layout_height="wrap_content"
-                       app:layout_constraintEnd_toEndOf="parent"
-                       android:textColor="@android:color/primary_text_dark"
-                       android:text='@{Instant.ofEpochSecond(photo.timestamp.raw/1000).atZone(ZoneId.of("Asia/Hong_Kong")).toString()}'/>
+            <TextView android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:textColor="@android:color/primary_text_dark"
+                      android:text='@{photo.user.username}'
+                      android:id="@+id/textView1"/>
+
+            <TextView android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:textColor="@android:color/primary_text_dark"
+                      android:text='@{Instant.ofEpochSecond(photo.timestamp.raw/1000).atZone(ZoneId.of("Asia/Hong_Kong")).toString()}'
+                      android:layout_marginTop="8dp"
+                      app:layout_constraintTop_toBottomOf="@+id/textView1"
+                      app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="8dp"
+                      android:id="@+id/textView2"/>
         </android.support.constraint.ConstraintLayout>
 
         <android.support.v4.widget.Space  android:layout_width="match_parent"
