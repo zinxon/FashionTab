@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <import type="java.time.Instant" />
+        <import type="java.time.ZoneId" />
+        <import type="android.text.Html" />
+        <variable  name="photo"
+                   type="hk.edu.hkbu.comp.e5225623.fashiontap.json.Photo"/>
+    </data>
+    <LinearLayout  android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:orientation="vertical">
+
+        <android.support.constraint.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/colorPrimaryDark">
+
+            <TextView  android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       app:layout_constraintStart_toStartOf="parent"
+                       android:textColor="@android:color/primary_text_dark"
+                       android:text='@{photo.user.username}'/>
+
+            <TextView  android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       app:layout_constraintEnd_toEndOf="parent"
+                       android:textColor="@android:color/primary_text_dark"
+                       android:text='@{Instant.ofEpochSecond(photo.timestamp.raw/1000).atZone(ZoneId.of("Asia/Hong_Kong")).toString()}'/>
+        </android.support.constraint.ConstraintLayout>
+
+        <android.support.v4.widget.Space  android:layout_width="match_parent"
+                                          android:layout_height="10dp" />
+    </LinearLayout>
+</layout>
