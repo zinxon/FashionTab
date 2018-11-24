@@ -3,9 +3,6 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools">
     <data>
-        <variable
-                name="centerText"
-                type="String" />
         <variable name="listViewModel" type="hk.edu.hkbu.comp.e5225623.fashiontap.ListViewModel&lt;hk.edu.hkbu.comp.e5225623.fashiontap.json.Photo>" />
     </data>
 

@@ -1,6 +1,7 @@
 package hk.edu.hkbu.comp.e5225623.fashiontap
 
 import android.databinding.DataBindingUtil
+import android.databinding.ObservableArrayList
 import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.v7.app.AppCompatActivity;
@@ -9,6 +10,7 @@ import hk.edu.hkbu.comp.e5225623.fashiontap.databinding.ActivityThreadBinding
 import hk.edu.hkbu.comp.e5225623.fashiontap.json.Photo
 
 import kotlinx.android.synthetic.main.activity_thread.*
+import me.tatarka.bindingcollectionadapter2.ItemBinding
 
 class ThreadActivity : AppCompatActivity() {
     lateinit var thread: Photo
@@ -26,6 +28,9 @@ class ThreadActivity : AppCompatActivity() {
         getSupportActionBar()?.setDisplayShowHomeEnabled(true)
         thread = intent.extras["thread"] as Photo
         getSupportActionBar()?.setTitle(thread.user.username)
+
+        binding.contentThread.itemBinding = ItemBinding.of<Photo>(BR.photo, R.layout.content_thread_item)
+        binding.contentThread.photo = thread as? ObservableArrayList<Photo>
 
     }
 

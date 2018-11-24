@@ -13,5 +13,5 @@ import com.squareup.picasso.Picasso
 @BindingAdapter("imageUrl")
 fun ImageView.bindImageUrl(url:String) {
     if (url.isNullOrBlank()) return
-    Picasso.get().load(url).into(this)
+    Picasso.get().load(url).resize(380, 320).into(this)
 }
