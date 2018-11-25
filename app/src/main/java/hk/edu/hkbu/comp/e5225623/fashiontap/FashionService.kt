@@ -23,6 +23,6 @@ interface FashionService {
     }
 
     @GET("/photo/popular")
-    fun getFashionPhoto(@Query("pageSize") pageSize: Int = 10,@Query("before") before: String = (System.currentTimeMillis()).toString()): Call<PhotoResponse>
+    fun getFashionPhoto(@Query("pageSize") pageSize: Int = 50,@Query("before") before: String = (System.currentTimeMillis()).toString()): Call<PhotoResponse>
 
 }

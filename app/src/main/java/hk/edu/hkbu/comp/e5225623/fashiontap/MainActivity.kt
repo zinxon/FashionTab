@@ -4,7 +4,6 @@ import android.content.Intent
 import android.databinding.DataBindingUtil
 import android.databinding.ObservableArrayList
 import android.os.Bundle
-import android.support.design.widget.Snackbar
 import android.support.design.widget.NavigationView
 import android.support.v4.view.GravityCompat
 import android.support.v7.app.ActionBarDrawerToggle
@@ -14,17 +13,11 @@ import android.view.Menu
 import android.view.MenuItem
 import hk.edu.hkbu.comp.e5225623.fashiontap.json.Photo
 import hk.edu.hkbu.comp.e5225623.fashiontap.json.PhotoResponse
-import hk.edu.hkbu.comp.e5225623.fashiontap.json.PhotoStream
 import hk.edu.hkbu.comp.e5225623.fashiontap.databinding.ActivityMainBinding
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
 import retrofit2.Call
 import retrofit2.Callback
-import com.squareup.picasso.Picasso
-import de.hdodenhof.circleimageview.CircleImageView
-
-
-
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
     lateinit var binding: ActivityMainBinding
@@ -43,11 +36,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 //            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
 //                .setAction("Action", null).show()
 //        }
-
-//        // 連結ImageView
-//        val profile_image = findViewById(R.id.profile_image) as CircleImageView
-//        // 讀取圖片
-//        Picasso.with(this).load("http://i.imgur.com/XY1856Y.png").into(profile_image)
 
         val toggle = ActionBarDrawerToggle(
             this, drawer_layout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close
@@ -143,7 +131,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
     fun showThreadActivity(thread:Photo) {
         with(Intent(this, ThreadActivity::class.java)) {
-            putExtra("thread", thread)
+//            putExtra("thread", thread)
             startActivity(this)
             overridePendingTransition(R.anim.child_enter, R.anim.parent_exit)
         }

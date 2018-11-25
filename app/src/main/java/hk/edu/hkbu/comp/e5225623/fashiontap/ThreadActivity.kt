@@ -6,31 +6,53 @@ import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem
+import android.view.View
+import com.google.android.youtube.player.YouTubeBaseActivity
 import hk.edu.hkbu.comp.e5225623.fashiontap.databinding.ActivityThreadBinding
 import hk.edu.hkbu.comp.e5225623.fashiontap.json.Photo
 
 import kotlinx.android.synthetic.main.activity_thread.*
 import me.tatarka.bindingcollectionadapter2.ItemBinding
+import com.google.android.youtube.player.YouTubeInitializationResult
+import com.google.android.youtube.player.YouTubePlayer
+import com.google.android.youtube.player.YouTubePlayerView
 
-class ThreadActivity : AppCompatActivity() {
-    lateinit var thread: Photo
+
+
+class ThreadActivity : YouTubeBaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_thread)
         val binding: ActivityThreadBinding = DataBindingUtil.setContentView(this, R.layout.activity_thread)
-        setSupportActionBar(toolbar)
 
-        fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show()
-        }
-        getSupportActionBar()?.setDisplayHomeAsUpEnabled(true)
-        getSupportActionBar()?.setDisplayShowHomeEnabled(true)
-        thread = intent.extras["thread"] as Photo
-        getSupportActionBar()?.setTitle(thread.user.username)
+//        fab.setOnClickListener { view ->
+//            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+//                .setAction("Action", null).show()
+//        }
 
-        binding.contentThread.itemBinding = ItemBinding.of<Photo>(BR.photo, R.layout.content_thread_item)
-        binding.contentThread.photo = thread as? ObservableArrayList<Photo>
+        val youTubePlayerView = findViewById<View>(R.id.player) as YouTubePlayerView
+
+        youTubePlayerView.initialize("AIzaSyBfemQ9-xiY5eA0X6tKKFpaOa_ZXuLUZ5g",
+            object : YouTubePlayer.OnInitializedListener {
+                override fun onInitializationSuccess(
+                    provider: YouTubePlayer.Provider,
+                    youTubePlayer: YouTubePlayer, b: Boolean
+                ) {
+
+                    // do any work here to cue video, play video, etc.
+//                    youTubePlayer.cueVideo("5xVh-7ywKpE")
+                    youTubePlayer.loadPlaylist("PLyoPUP8uSFrffq2z_NAZyg6pLCru73zgD")
+                }
+
+                override fun onInitializationFailure(
+                    provider: YouTubePlayer.Provider,
+                    youTubeInitializationResult: YouTubeInitializationResult
+                ) {
+
+                }
+
+            })
+
 
     }
 
