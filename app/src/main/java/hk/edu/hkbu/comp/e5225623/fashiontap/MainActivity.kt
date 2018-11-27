@@ -27,15 +27,14 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
-//        binding.appBarMain.contentMain.centerText = "Hello World!"
         binding.appBarMain.contentMain.listViewModel = ListViewModel<Photo>(BR.threadItem, R.layout.content_main_item)
-//        setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
-
-//        fab.setOnClickListener { view ->
-//            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-//                .setAction("Action", null).show()
-//        }
+        //        binding.appBarMain.contentMain.centerText = "Hello World!"
+        //        setContentView(R.layout.activity_main)
+        //        fab.setOnClickListener { view ->
+        //            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+        //                .setAction("Action", null).show()
+        //        }
 
         val toggle = ActionBarDrawerToggle(
             this, drawer_layout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close

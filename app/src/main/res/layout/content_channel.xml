@@ -3,15 +3,15 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools">
     <data>
-        <variable name="listViewModel" type="hk.edu.hkbu.comp.e5225623.fashiontap.ListViewModel&lt;hk.edu.hkbu.comp.e5225623.fashiontap.json.Photo>" />
+        <variable name="listViewModel" type="hk.edu.hkbu.comp.e5225623.fashiontap.ListViewModel&lt;hk.edu.hkbu.comp.e5225623.fashiontap.json.Item>" />
     </data>
 
 <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        tools:showIn="@layout/app_bar_main"
-        tools:context=".MainActivity">
+        tools:showIn="@layout/activity_thread"
+        tools:context=".ThreadActivity">
 
     <android.support.v7.widget.RecyclerView
             android:layout_width="0dp"
@@ -27,7 +27,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:id="@+id/list"/>
+            android:id="@+id/channelList"/>
+
 
 </android.support.constraint.ConstraintLayout>
 </layout>

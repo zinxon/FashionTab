@@ -13,7 +13,6 @@ import hk.edu.hkbu.comp.e5225623.fashiontap.databinding.ActivityThreadBinding
 import com.google.android.youtube.player.YouTubeInitializationResult
 import com.google.android.youtube.player.YouTubePlayer
 import com.google.android.youtube.player.YouTubePlayerView
-import hk.edu.hkbu.comp.e5225623.fashiontap.databinding.ActivityMainBinding
 import hk.edu.hkbu.comp.e5225623.fashiontap.json.Item
 import hk.edu.hkbu.comp.e5225623.fashiontap.json.Photo
 import hk.edu.hkbu.comp.e5225623.fashiontap.json.YoutubeChannelResponse
@@ -22,14 +21,11 @@ import retrofit2.Callback
 
 
 class ThreadActivity : YouTubeBaseActivity() {
-    lateinit var binding: ActivityMainBinding
+    lateinit var binding: ActivityThreadBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_thread)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_thread)
-        binding.appBarMain.contentMain.listViewModel = ListViewModel<Item>(BR.channelItem, R.layout.activity_thread)
-
-
+        binding.contentChannel.listViewModel = ListViewModel<Item>(BR.channelItem, R.layout.content_channel_item)
 
         YoutubeService.instance.getYoutubeChannel().enqueue(object : Callback<YoutubeChannelResponse> {
             override fun onFailure(call: Call<YoutubeChannelResponse>, t: Throwable) {
@@ -38,16 +34,20 @@ class ThreadActivity : YouTubeBaseActivity() {
 
             override fun onResponse(call: Call<YoutubeChannelResponse>, response: retrofit2.Response<YoutubeChannelResponse>) {
                 if (response.isSuccessful) {
-                    val channel = response.body()
+                    val channelItem = response.body()?.items as List<Item>
                         Log.d(
                             "getYoutubeChannel",
-                            "channel name: " + channel?.items?.get(0)?.snippet?.title
-                        +  "\nchannel description: " + channel?.items?.get(0)?.snippet?.description
-                                    +  "\nchannel thumbnails: " + channel?.items?.get(0)?.snippet?.thumbnails?.high?.url
-                                    +  "\nchannel viewCount: " + channel?.items?.get(0)?.statistics?.viewCount
-                                    +  "\nchannel subscriberCount: " + channel?.items?.get(0)?.statistics?.subscriberCount
-                                    +  "\nchannel videoCount: " + channel?.items?.get(0)?.statistics?.videoCount
+                            "channel name: " + channelItem?.get(0)?.snippet?.title
+                        +  "\nchannel description: " + channelItem?.get(0)?.snippet?.description
+                                    +  "\nchannel thumbnails: " + channelItem?.get(0)?.snippet?.thumbnails?.high?.url
+                                    +  "\nchannel viewCount: " + channelItem?.get(0)?.statistics?.viewCount
+                                    +  "\nchannel subscriberCount: " + channelItem?.get(0)?.statistics?.subscriberCount
+                                    +  "\nchannel videoCount: " + channelItem?.get(0)?.statistics?.videoCount
                         )
+                    with(binding.contentChannel.listViewModel?.items as ObservableArrayList<Item>) {
+                        clear()
+                        addAll(channelItem)
+                    }
                 }
             }
         })
