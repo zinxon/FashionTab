@@ -5,30 +5,54 @@ import android.databinding.ObservableArrayList
 import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log
 import android.view.MenuItem
 import android.view.View
 import com.google.android.youtube.player.YouTubeBaseActivity
 import hk.edu.hkbu.comp.e5225623.fashiontap.databinding.ActivityThreadBinding
-import hk.edu.hkbu.comp.e5225623.fashiontap.json.Photo
-
-import kotlinx.android.synthetic.main.activity_thread.*
-import me.tatarka.bindingcollectionadapter2.ItemBinding
 import com.google.android.youtube.player.YouTubeInitializationResult
 import com.google.android.youtube.player.YouTubePlayer
 import com.google.android.youtube.player.YouTubePlayerView
-
+import hk.edu.hkbu.comp.e5225623.fashiontap.databinding.ActivityMainBinding
+import hk.edu.hkbu.comp.e5225623.fashiontap.json.Item
+import hk.edu.hkbu.comp.e5225623.fashiontap.json.Photo
+import hk.edu.hkbu.comp.e5225623.fashiontap.json.YoutubeChannelResponse
+import retrofit2.Call
+import retrofit2.Callback
 
 
 class ThreadActivity : YouTubeBaseActivity() {
+    lateinit var binding: ActivityMainBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_thread)
-        val binding: ActivityThreadBinding = DataBindingUtil.setContentView(this, R.layout.activity_thread)
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_thread)
+        binding.appBarMain.contentMain.listViewModel = ListViewModel<Item>(BR.channelItem, R.layout.activity_thread)
 
-//        fab.setOnClickListener { view ->
-//            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-//                .setAction("Action", null).show()
-//        }
+
+
+        YoutubeService.instance.getYoutubeChannel().enqueue(object : Callback<YoutubeChannelResponse> {
+            override fun onFailure(call: Call<YoutubeChannelResponse>, t: Throwable) {
+                Log.e("ThreadActivity", t.message)
+            }
+
+            override fun onResponse(call: Call<YoutubeChannelResponse>, response: retrofit2.Response<YoutubeChannelResponse>) {
+                if (response.isSuccessful) {
+                    val channel = response.body()
+                        Log.d(
+                            "getYoutubeChannel",
+                            "channel name: " + channel?.items?.get(0)?.snippet?.title
+                        +  "\nchannel description: " + channel?.items?.get(0)?.snippet?.description
+                                    +  "\nchannel thumbnails: " + channel?.items?.get(0)?.snippet?.thumbnails?.high?.url
+                                    +  "\nchannel viewCount: " + channel?.items?.get(0)?.statistics?.viewCount
+                                    +  "\nchannel subscriberCount: " + channel?.items?.get(0)?.statistics?.subscriberCount
+                                    +  "\nchannel videoCount: " + channel?.items?.get(0)?.statistics?.videoCount
+                        )
+                }
+            }
+        })
+
+//        val youtubeFragment = fragmentManager.findFragmentById(R.id.youtubeFragment) as YouTubePlayerFragment
 
         val youTubePlayerView = findViewById<View>(R.id.player) as YouTubePlayerView
 
@@ -41,7 +65,7 @@ class ThreadActivity : YouTubeBaseActivity() {
 
                     // do any work here to cue video, play video, etc.
 //                    youTubePlayer.cueVideo("5xVh-7ywKpE")
-                    youTubePlayer.loadPlaylist("PLyoPUP8uSFrffq2z_NAZyg6pLCru73zgD")
+                    youTubePlayer.loadPlaylist("UU3T5fmgL4Kvk3kG1kF6JFeA")
                 }
 
                 override fun onInitializationFailure(
